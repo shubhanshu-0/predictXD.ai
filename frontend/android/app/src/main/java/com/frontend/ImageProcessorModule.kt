@@ -1,36 +1,16 @@
-package com.yourapp
+package com.frontend
 
-import android.util.Log
+import com.facebook.react.ReactPackage
+import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReactContextBaseJavaModule
-import com.facebook.react.bridge.ReactMethod
-import com.facebook.react.bridge.Promise
+import com.facebook.react.uimanager.ViewManager
 
-class ImagePreprocessorModule(reactContext: ReactApplicationContext) :
-    ReactContextBaseJavaModule(reactContext) {
-
-    companion object {
-        // Load the C++ library
-        init {
-            System.loadLibrary("preprocess")
-        }
+class ImagePreprocessorPackage : ReactPackage {
+    override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
+        return listOf(ImagePreprocessorModule(reactContext))
     }
 
-    override fun getName(): String {
-        return "ImagePreprocessorModule"
+    override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
+        return emptyList()  // No custom view managers
     }
-
-    // This method will be called from React Native
-    @ReactMethod
-    fun preprocessImage(imagePath: String, promise: Promise) {
-        try {
-            preprocess(imagePath)  // Call the C++ function
-            promise.resolve("Image Preprocessing Complete")
-        } catch (e: Exception) {
-            promise.reject("Error", e)
-        }
-    }
-
-    // Declare the native C++ function
-    private external fun preprocess(imagePath: String)
 }

@@ -1,41 +1,27 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React, { useState } from 'react';
-import type { PropsWithChildren } from 'react';
-
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
   TouchableOpacity,
   NativeModules,
   Image,
 } from 'react-native';
-
-
 import ImagePicker from 'react-native-image-crop-picker';
 
 function App(): React.JSX.Element {
-  const [imageUri, setImageUri] = useState<string | null>(null); 
+  const [imageUri, setImageUri] = useState<string | null>(null);
   const [loadImage, setLoadImage] = useState(false);
 
   const handleLoad = () => {
     ImagePicker.openPicker({
       width: 300,
       height: 400,
-      cropping: true, 
+      cropping: true,
     })
       .then(image => {
-        setImageUri(image.path); 
+        setImageUri(image.path);
         setLoadImage(true);
         console.log("Image Loaded!");
       })
@@ -45,7 +31,7 @@ function App(): React.JSX.Element {
   };
 
   const handleUnload = () => {
-    setImageUri(null); 
+    setImageUri(null);
     setLoadImage(false);
     console.log("Removed!");
   };
@@ -63,11 +49,18 @@ function App(): React.JSX.Element {
       }
     }
   };
+  
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.appName}><Text style={{color : 'black'}}>Xapp</Text></View>
-      <View><Text>Hello</Text></View>
+      <View style={styles.appName}>
+        <Text style={styles.appNameText}>process.ai</Text>
+      </View>
+
+      <View style={styles.greetingBox}>
+        <Text style={styles.greetingText}>Welcome to Image Processor</Text>
+      </View>
+
       <View style={styles.imgBox}>
         {imageUri && (
           <Image
@@ -78,16 +71,16 @@ function App(): React.JSX.Element {
       </View>
 
       <View style={styles.buttonsBox}>
-        <TouchableOpacity style={styles.uploadBtn} onPress={handleLoad}>
-          <Text>Load Image</Text>
+        <TouchableOpacity style={[styles.button, styles.loadButton]} onPress={handleLoad}>
+          <Text style={styles.btnText}>Load Image</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.uploadBtn} onPress={handleUnload}>
-          <Text>Unload Image</Text>
+        <TouchableOpacity style={[styles.button, styles.unloadButton]} onPress={handleUnload}>
+          <Text style={styles.btnText}>Unload Image</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.uploadBtn} onPress={process}>
-          <Text>Process</Text>
+        <TouchableOpacity style={[styles.button, styles.processButton]} onPress={process}>
+          <Text style={styles.btnText}>Process</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -95,46 +88,93 @@ function App(): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
-  appName : {
-    height : '5%' ,
-    borderColor : 'black' , 
-    width : '100%' ,
-    position:'absolute' ,
-    top : 0 , 
-    borderBottomWidth : 2
-  } , 
-
-  container: {
-    height: '100%',
+  appName: {
+    height: '7%',
+    borderBottomWidth: 2,
+    borderBottomColor: '#1c1f2e',
     width: '100%',
-    backgroundColor: 'white',
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'absolute',
+    top: 0,
+    backgroundColor: '#22263a',
+  },
+  appNameText: {
+    color: '#FFFFFF',
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#141827',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: '10%',
+  },
+  greetingBox: {
+    marginVertical: 20,
+  },
+  greetingText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#5ea6f7',
   },
   imgBox: {
-    height: '50%',
-    width: '70%',
-    borderColor: 'black',
+    height: '40%',
+    width: '80%',
+    borderColor: 'white',
     borderWidth: 2,
-    alignItems: 'center', 
+    borderRadius: 15,
+    alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#1b1e2c',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    marginBottom: 20,
   },
   image: {
     width: '100%',
     height: '100%',
+    borderRadius: 12,
     resizeMode: 'contain',
   },
-  uploadBtn: {
-    marginTop: 5,
-    marginBottom: 5,
-    backgroundColor: '#5ea6f7',
-    padding: 10,
-    width: '100%',
-    alignItems: 'center',
-  },
   buttonsBox: {
-    width: '90%',
+    width: '80%',
+  },
+  button: {
+    marginBottom: 15,
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 1,
+    borderWidth: 2,
+    backgroundColor : '001F3F'
+  },
+  loadButton: {
+    // backgroundColor: '#3498db',
+    borderColor: '#3498db',
+  },
+  unloadButton: {
+    // backgroundColor: '#e74c3c',
+    borderColor: '#e74c3c',
+  },
+  processButton: {
+    // backgroundColor: '#2ecc71',
+    borderColor: '#2ecc71',
+  },
+  btnText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textShadowColor: '#000',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 3,
   },
 });
 
