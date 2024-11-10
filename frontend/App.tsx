@@ -36,7 +36,7 @@ function App(): React.JSX.Element {
     console.log("Removed!");
   };
 
-  const process = async () => {
+  const predict = async () => {
     if (!loadImage) {
       console.log('Load Image First!');
       return;
@@ -48,11 +48,11 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.appName}>
-        <Text style={styles.appNameText}>process.ai</Text>
+        <Text style={styles.appNameText}>predictXD.ai</Text>
       </View>
 
       <View style={styles.greetingBox}>
-        <Text style={styles.greetingText}>Welcome to Image Processor</Text>
+        <Text style={styles.greetingText}>Welcome</Text>
       </View>
 
       <View style={styles.imgBox}>
@@ -73,8 +73,8 @@ function App(): React.JSX.Element {
           <Text style={styles.btnText}>Unload Image</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.button, styles.processButton]} onPress={process}>
-          <Text style={styles.btnText}>Process</Text>
+        <TouchableOpacity style={[styles.button, styles.processButton]} onPress={predict}>
+          <Text style={styles.btnText}>Predict</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
