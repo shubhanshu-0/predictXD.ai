@@ -18,7 +18,6 @@ class MainApplication : Application(), ReactApplication {
         override fun getPackages(): List<ReactPackage> =
             PackageList(this).packages.apply {
               // Register your custom package here
-              // add(ImagePreprocessorPackage())  // <-- Add the custom package
             }
 
         override fun getJSMainModuleName(): String = "index"

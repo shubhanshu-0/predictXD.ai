@@ -41,13 +41,7 @@ function App(): React.JSX.Element {
       console.log('Load Image First!');
       return;
     }
-    if (imageUri) {
-      try {
-        await NativeModules.ImagePreprocessorModule.preprocessImage(imageUri);
-      } catch (error) {
-        console.log("Error during preprocessing: ", error);
-      }
-    }
+    
   };
   
 
