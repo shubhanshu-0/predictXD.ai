@@ -135,5 +135,5 @@ dependencies {
         implementation jscFlavor
     }
 
-    // implementation project(':opencv')
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 }

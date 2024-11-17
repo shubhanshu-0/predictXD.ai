@@ -7,6 +7,6 @@
     "esModuleInterop": true,
     "skipLibCheck": true
   },
-  "include": ["**/*.ts", "**/*.tsx"],  // Adjust this to include your TypeScript files
+  "include": ["**/*.ts", "**/*.tsx" , "src/**/*"],  // Adjust this to include your TypeScript files
   "exclude": ["node_modules"]
 }
