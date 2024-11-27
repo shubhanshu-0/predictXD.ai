@@ -1,9 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+
 
 import React, { useState , useEffect} from 'react';
 import {
@@ -20,12 +15,13 @@ import {
 import Start from './src/screens/Start';
 import Home from './src/screens/Home';
 
-const API_BASE_URL = 'http://192.168.29.223:5001/';
+const API_BASE_URL = 'http://192.168.1.88:5001/';
 
 function App() : React.JSX.Element{
 
-  const [start , setStart] = useState(false)
+  const [start , setStart] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const [ready , setReady] = useState(false);
 
   const fetchMessage = async () => {
   try {
@@ -33,7 +29,8 @@ function App() : React.JSX.Element{
     const data = await response.json();
     if (response.ok) {
       setMessage(data.message);
-      Alert.alert('Success', 'Message fetched successfully!'); // Alert for successful fetch
+      setReady(true);
+      // Alert.alert('Success', 'Message fetched successfully!'); // Alert for successful fetch
     } else {
       Alert.alert('Error', 'Failed to fetch message from server.');
     }
@@ -45,7 +42,11 @@ function App() : React.JSX.Element{
 
 
   const handleStart = () => {
-    setStart(true);
+    if(!ready)  {
+      Alert.alert('Error', 'Failed to connect to server.');
+      return;
+    }
+    else setStart(true);
   }
 
   useEffect(() => {
@@ -55,7 +56,7 @@ function App() : React.JSX.Element{
   return (
         <SafeAreaView style={styles.bg}>
       {!start ? (
-        <Start onStart={handleStart} />
+        <Start ready={ready} onStart={handleStart} />
       ) : (
         <Home />
       )}
